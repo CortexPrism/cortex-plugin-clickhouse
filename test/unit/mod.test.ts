@@ -1,4 +1,3 @@
-// deno-lint-ignore-file require-await, no-unused-vars
 import { assertEquals } from 'https://deno.land/std@0.208.0/assert/mod.ts';
 import { tools } from '../../mod.ts';
 import type { PluginContext } from 'cortex/plugins';
@@ -10,7 +9,6 @@ const ctx: PluginContext = {
   config: {},
   logger: { info: () => {}, warn: () => {}, error: () => {}, debug: () => {} },
 };
-const find = (n: string) => tools.find((t) => t.definition.name === n)!;
 
 for (const t of tools) {
   Deno.test(`${t.definition.name} — returns success`, async () => {
