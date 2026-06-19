@@ -1,0 +1,152 @@
+{
+  "name": "cortex-plugin-clickhouse",
+  "version": "1.0.0",
+  "description": "ClickHouse / Trino Analytical Query Agent — petabyte-scale OLAP analytics. Direct read-only access to ClickHouse and Trino for exploring massive datasets, writing optimized queries, and generating dashboards.",
+  "kind": "esm",
+  "entryPoint": "mod.ts",
+  "runtime": "deno",
+  "author": "CortexPrism",
+  "license": "MIT",
+  "repository": "https://github.com/CortexPrism/cortex-plugin-clickhouse",
+  "homepage": "https://cortexprism.io/marketplace/plugins/clickhouse",
+  "capabilities": ["tools", "network:fetch", "db:read"],
+  "tools": [
+    {
+      "name": "analytics_query",
+      "description": "Execute a read-only analytical SQL query against ClickHouse or Trino",
+      "params": [
+        {
+          "name": "engine",
+          "type": "string",
+          "description": "Query engine",
+          "required": true,
+          "enum": ["clickhouse", "trino"]
+        },
+        {
+          "name": "query",
+          "type": "string",
+          "description": "SQL query (SELECT only)",
+          "required": true
+        },
+        {
+          "name": "connection",
+          "type": "string",
+          "description": "Connection name (if multiple configured)",
+          "required": false
+        },
+        {
+          "name": "format",
+          "type": "string",
+          "description": "Output format",
+          "required": false,
+          "enum": ["json", "table", "csv"]
+        },
+        {
+          "name": "max_rows",
+          "type": "number",
+          "description": "Max result rows (default: 1000)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "analytics_explain",
+      "description": "Get the query execution plan and estimated cost before running",
+      "params": [
+        {
+          "name": "engine",
+          "type": "string",
+          "description": "Query engine",
+          "required": true,
+          "enum": ["clickhouse", "trino"]
+        },
+        {
+          "name": "query",
+          "type": "string",
+          "description": "SQL query to explain",
+          "required": true
+        },
+        {
+          "name": "connection",
+          "type": "string",
+          "description": "Connection name",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "analytics_explore_schema",
+      "description": "Explore available databases, tables, columns, and data types",
+      "params": [
+        {
+          "name": "engine",
+          "type": "string",
+          "description": "Query engine",
+          "required": true,
+          "enum": ["clickhouse", "trino"]
+        },
+        { "name": "database", "type": "string", "description": "Database name", "required": false },
+        {
+          "name": "table",
+          "type": "string",
+          "description": "Table name for column details",
+          "required": false
+        },
+        {
+          "name": "connection",
+          "type": "string",
+          "description": "Connection name",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "analytics_dashboard",
+      "description": "Generate a dashboard configuration from query results with chart recommendations",
+      "params": [
+        {
+          "name": "engine",
+          "type": "string",
+          "description": "Query engine",
+          "required": true,
+          "enum": ["clickhouse", "trino"]
+        },
+        {
+          "name": "queries",
+          "type": "string",
+          "description": "JSON array of {name, query} pairs for dashboard panels",
+          "required": true
+        },
+        { "name": "title", "type": "string", "description": "Dashboard title", "required": false }
+      ]
+    }
+  ],
+  "dependencies": {},
+  "peerDependencies": { "cortex": ">=1.0.0" },
+  "ui": {
+    "settings": [
+      {
+        "section": "ClickHouse",
+        "fields": [
+          { "key": "clickhouseHost", "label": "Host", "type": "text", "defaultValue": "localhost" },
+          { "key": "clickhousePort", "label": "Port", "type": "number", "defaultValue": 8123 },
+          { "key": "clickhouseUser", "label": "User", "type": "text", "defaultValue": "default" },
+          { "key": "clickhousePassword", "label": "Password", "type": "secret", "defaultValue": "" }
+        ]
+      },
+      {
+        "section": "Trino",
+        "fields": [
+          { "key": "trinoHost", "label": "Host", "type": "text", "defaultValue": "localhost" },
+          { "key": "trinoPort", "label": "Port", "type": "number", "defaultValue": 8080 },
+          { "key": "trinoUser", "label": "User", "type": "text", "defaultValue": "trino" },
+          { "key": "trinoCatalog", "label": "Default Catalog", "type": "text", "defaultValue": "" }
+        ]
+      }
+    ]
+  },
+  "aiDisclosure": {
+    "tools": ["Kilo (DeepSeek) — scaffold and implementation"],
+    "humanReview": true
+  }
+}
