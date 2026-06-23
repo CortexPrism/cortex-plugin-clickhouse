@@ -1,7 +1,7 @@
 {
   "name": "cortex-plugin-clickhouse",
-  "version": "1.0.0",
-  "description": "ClickHouse / Trino Analytical Query Agent — petabyte-scale OLAP analytics. Direct read-only access to ClickHouse and Trino for exploring massive datasets, writing optimized queries, and generating dashboards.",
+  "version": "1.0.1",
+  "description": "ClickHouse / Trino Analytical Query Agent \u2014 petabyte-scale OLAP analytics. Direct read-only access to ClickHouse and Trino for exploring massive datasets, writing optimized queries, and generating dashboards.",
   "kind": "esm",
   "entryPoint": "mod.ts",
   "runtime": "deno",
@@ -9,7 +9,11 @@
   "license": "MIT",
   "repository": "https://github.com/CortexPrism/cortex-plugin-clickhouse",
   "homepage": "https://cortexprism.io/marketplace/plugins/clickhouse",
-  "capabilities": ["tools", "network:fetch", "db:read"],
+  "capabilities": [
+    "tools",
+    "network:fetch",
+    "db:read"
+  ],
   "tools": [
     {
       "name": "analytics_query",
@@ -20,7 +24,10 @@
           "type": "string",
           "description": "Query engine",
           "required": true,
-          "enum": ["clickhouse", "trino"]
+          "enum": [
+            "clickhouse",
+            "trino"
+          ]
         },
         {
           "name": "query",
@@ -39,7 +46,11 @@
           "type": "string",
           "description": "Output format",
           "required": false,
-          "enum": ["json", "table", "csv"]
+          "enum": [
+            "json",
+            "table",
+            "csv"
+          ]
         },
         {
           "name": "max_rows",
@@ -58,7 +69,10 @@
           "type": "string",
           "description": "Query engine",
           "required": true,
-          "enum": ["clickhouse", "trino"]
+          "enum": [
+            "clickhouse",
+            "trino"
+          ]
         },
         {
           "name": "query",
@@ -83,9 +97,17 @@
           "type": "string",
           "description": "Query engine",
           "required": true,
-          "enum": ["clickhouse", "trino"]
+          "enum": [
+            "clickhouse",
+            "trino"
+          ]
         },
-        { "name": "database", "type": "string", "description": "Database name", "required": false },
+        {
+          "name": "database",
+          "type": "string",
+          "description": "Database name",
+          "required": false
+        },
         {
           "name": "table",
           "type": "string",
@@ -109,7 +131,10 @@
           "type": "string",
           "description": "Query engine",
           "required": true,
-          "enum": ["clickhouse", "trino"]
+          "enum": [
+            "clickhouse",
+            "trino"
+          ]
         },
         {
           "name": "queries",
@@ -117,36 +142,85 @@
           "description": "JSON array of {name, query} pairs for dashboard panels",
           "required": true
         },
-        { "name": "title", "type": "string", "description": "Dashboard title", "required": false }
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Dashboard title",
+          "required": false
+        }
       ]
     }
   ],
   "dependencies": {},
-  "peerDependencies": { "cortex": ">=1.0.0" },
+  "peerDependencies": {
+    "cortex": ">=0.51.0"
+  },
   "ui": {
     "settings": [
       {
         "section": "ClickHouse",
         "fields": [
-          { "key": "clickhouseHost", "label": "Host", "type": "text", "defaultValue": "localhost" },
-          { "key": "clickhousePort", "label": "Port", "type": "number", "defaultValue": 8123 },
-          { "key": "clickhouseUser", "label": "User", "type": "text", "defaultValue": "default" },
-          { "key": "clickhousePassword", "label": "Password", "type": "secret", "defaultValue": "" }
+          {
+            "key": "clickhouseHost",
+            "label": "Host",
+            "type": "text",
+            "defaultValue": "localhost"
+          },
+          {
+            "key": "clickhousePort",
+            "label": "Port",
+            "type": "number",
+            "defaultValue": 8123
+          },
+          {
+            "key": "clickhouseUser",
+            "label": "User",
+            "type": "text",
+            "defaultValue": "default"
+          },
+          {
+            "key": "clickhousePassword",
+            "label": "Password",
+            "type": "secret",
+            "defaultValue": ""
+          }
         ]
       },
       {
         "section": "Trino",
         "fields": [
-          { "key": "trinoHost", "label": "Host", "type": "text", "defaultValue": "localhost" },
-          { "key": "trinoPort", "label": "Port", "type": "number", "defaultValue": 8080 },
-          { "key": "trinoUser", "label": "User", "type": "text", "defaultValue": "trino" },
-          { "key": "trinoCatalog", "label": "Default Catalog", "type": "text", "defaultValue": "" }
+          {
+            "key": "trinoHost",
+            "label": "Host",
+            "type": "text",
+            "defaultValue": "localhost"
+          },
+          {
+            "key": "trinoPort",
+            "label": "Port",
+            "type": "number",
+            "defaultValue": 8080
+          },
+          {
+            "key": "trinoUser",
+            "label": "User",
+            "type": "text",
+            "defaultValue": "trino"
+          },
+          {
+            "key": "trinoCatalog",
+            "label": "Default Catalog",
+            "type": "text",
+            "defaultValue": ""
+          }
         ]
       }
     ]
   },
   "aiDisclosure": {
-    "tools": ["Kilo (DeepSeek) — scaffold and implementation"],
+    "tools": [
+      "Kilo (DeepSeek) \u2014 scaffold and implementation"
+    ],
     "humanReview": true
   }
 }
